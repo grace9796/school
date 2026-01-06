@@ -19,7 +19,8 @@ const handler = NextAuth({
 
             // 將用戶資訊同步到後端 API
             try {
-                const response = await fetch(`${process.env.API_URL}/api/auth/sync`, {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'http://localhost:3000';
+                const response = await fetch(`${apiUrl}/api/auth/sync`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

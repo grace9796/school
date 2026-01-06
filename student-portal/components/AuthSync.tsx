@@ -50,7 +50,8 @@ export function AuthSync() {
             // 同步用戶到後端
             try {
                 console.log('Syncing user to backend...');
-                const response = await fetch('http://localhost:3000/api/auth/sync', {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+                const response = await fetch(`${apiUrl}/api/auth/sync`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

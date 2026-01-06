@@ -1,12 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Specify the root directory to avoid workspace detection issues
-  experimental: {
-    turbo: {
-      root: '.',
-    },
-  },
+  output: 'standalone',
 };
 
 export default nextConfig;

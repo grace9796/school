@@ -32,7 +32,8 @@ export default function PurchasePage() {
     const fetchCoaches = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:3000/api/coaches');
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+            const response = await fetch(`${apiUrl}/api/coaches`);
             const data = await response.json();
             setCoaches(data);
             if (data.length > 0) {
@@ -61,7 +62,8 @@ export default function PurchasePage() {
         setPurchasing(true);
 
         try {
-            const response = await fetch('http://localhost:3000/api/student/purchase', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+            const response = await fetch(`${apiUrl}/api/student/purchase`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -128,8 +130,8 @@ export default function PurchasePage() {
                             <button
                                 onClick={() => setCourseType('1對1')}
                                 className={`p-6 rounded-lg border-2 transition-all ${courseType === '1對1'
-                                        ? 'border-purple-600 bg-purple-50'
-                                        : 'border-gray-300 hover:border-purple-300'
+                                    ? 'border-purple-600 bg-purple-50'
+                                    : 'border-gray-300 hover:border-purple-300'
                                     }`}
                             >
                                 <div className="text-4xl mb-2">👨‍🏫</div>
@@ -142,8 +144,8 @@ export default function PurchasePage() {
                             <button
                                 onClick={() => setCourseType('團課')}
                                 className={`p-6 rounded-lg border-2 transition-all ${courseType === '團課'
-                                        ? 'border-blue-600 bg-blue-50'
-                                        : 'border-gray-300 hover:border-blue-300'
+                                    ? 'border-blue-600 bg-blue-50'
+                                    : 'border-gray-300 hover:border-blue-300'
                                     }`}
                             >
                                 <div className="text-4xl mb-2">👥</div>
@@ -180,8 +182,8 @@ export default function PurchasePage() {
                                     key={count}
                                     onClick={() => setTotalSessions(count)}
                                     className={`p-4 rounded-lg border-2 transition-all ${totalSessions === count
-                                            ? 'border-purple-600 bg-purple-50'
-                                            : 'border-gray-300 hover:border-purple-300'
+                                        ? 'border-purple-600 bg-purple-50'
+                                        : 'border-gray-300 hover:border-purple-300'
                                         }`}
                                 >
                                     <div className="text-2xl font-bold text-gray-900">{count}</div>

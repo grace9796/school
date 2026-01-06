@@ -1,2 +1,2 @@
-# Ignore vercel.json when deploying student-portal
-vercel.json
+# Ignore root vercel.json (it's for backend API)
+../vercel.json

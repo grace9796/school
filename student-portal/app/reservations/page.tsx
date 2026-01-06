@@ -36,7 +36,8 @@ export default function ReservationsPage() {
     const fetchBookings = async () => {
         try {
             const studentId = (session?.user as any)?.studentId || localStorage.getItem('studentId');
-            const response = await fetch(`http://localhost:3000/api/student/bookings?studentId=${studentId}`);
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+            const response = await fetch(`${apiUrl}/api/student/bookings?studentId=${studentId}`);
             const data = await response.json();
             setBookings(data);
 

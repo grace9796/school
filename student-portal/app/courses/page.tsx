@@ -39,7 +39,16 @@ export default function CoursesPage() {
 
     const fetchCourses = async () => {
         try {
-            const studentId = (session?.user as any)?.studentId;
+            // 尝试从 session 或 localStorage 获取 studentId
+            let studentId = (session?.user as any)?.studentId;
+
+            if (!studentId) {
+                studentId = localStorage.getItem('studentId');
+                console.log('Retrieved studentId from localStorage:', studentId);
+            } else {
+                console.log('Retrieved studentId from session:', studentId);
+            }
+
             console.log('Fetching courses for studentId:', studentId);
 
             if (!studentId) {

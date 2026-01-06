@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, X, Trash2, Users } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function CoachManager() {
     const [coaches, setCoaches] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ function CoachManager() {
 
     const loadCoaches = async () => {
         try {
-            const response = await fetch('/api/coaches');
+            const response = await fetch(`${API_URL}/api/coaches`);
             const data = await response.json();
             setCoaches(data);
             setLoading(false);
@@ -29,7 +31,7 @@ function CoachManager() {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/coaches', {
+            const response = await fetch(`${API_URL}/api/coaches`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -49,7 +51,7 @@ function CoachManager() {
         if (!confirm('確定要刪除此教練嗎？')) return;
 
         try {
-            const response = await fetch(`/api/coaches/${coachId}`, {
+            const response = await fetch(`${API_URL}/api/coaches/${coachId}`, {
                 method: 'DELETE'
             });
 

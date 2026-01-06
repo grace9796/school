@@ -3,6 +3,8 @@ import { Calendar as CalendarIcon, Plus, X } from 'lucide-react';
 import { format, addDays, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function ScheduleManager() {
     const [schedules, setSchedules] = useState([]);
     const [coaches, setCoaches] = useState([]);
@@ -46,7 +48,7 @@ function ScheduleManager() {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/schedules/batch', {
+            const response = await fetch(`${API_URL}/api/schedules/batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Filter, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function BookingManager() {
     const [bookings, setBookings] = useState([]);
     const [filteredBookings, setFilteredBookings] = useState([]);
@@ -19,7 +21,7 @@ function BookingManager() {
 
     const loadBookings = async () => {
         try {
-            const response = await fetch('/api/bookings');
+            const response = await fetch(`${API_URL}/api/bookings`);
             const data = await response.json();
             setBookings(data);
             setLoading(false);

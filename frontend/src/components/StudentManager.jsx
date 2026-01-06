@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, X, Search, Edit, UserPlus } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function StudentManager() {
     const [students, setStudents] = useState([]);
     const [filteredStudents, setFilteredStudents] = useState([]);
@@ -34,7 +36,7 @@ function StudentManager() {
 
     const loadStudents = async () => {
         try {
-            const response = await fetch('/api/students');
+            const response = await fetch(`${API_URL}/api/students`);
             const data = await response.json();
             setStudents(data);
             setFilteredStudents(data);
@@ -49,7 +51,7 @@ function StudentManager() {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/students', {
+            const response = await fetch(`${API_URL}/api/students`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

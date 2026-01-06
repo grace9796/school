@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, X, Package } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function CourseManager() {
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
@@ -22,9 +24,9 @@ function CourseManager() {
     const loadData = async () => {
         try {
             const [coursesRes, studentsRes, coachesRes] = await Promise.all([
-                fetch('/api/courses'),
-                fetch('/api/students'),
-                fetch('/api/coaches')
+                fetch(`${API_URL}/api/courses`),
+                fetch(`${API_URL}/api/students`),
+                fetch(`${API_URL}/api/coaches`)
             ]);
             const coursesData = await coursesRes.json();
             const studentsData = await studentsRes.json();
@@ -44,7 +46,7 @@ function CourseManager() {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/courses', {
+            const response = await fetch(`${API_URL}/api/courses`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Users, Package, TrendingUp } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 function Dashboard() {
     const [stats, setStats] = useState({
         totalStudents: 0,
@@ -17,9 +19,9 @@ function Dashboard() {
     const loadDashboardData = async () => {
         try {
             const [studentsRes, coursesRes, bookingsRes] = await Promise.all([
-                fetch('/api/students'),
-                fetch('/api/courses'),
-                fetch('/api/bookings')
+                fetch(`${API_URL}/api/students`),
+                fetch(`${API_URL}/api/courses`),
+                fetch(`${API_URL}/api/bookings`)
             ]);
 
             const students = await studentsRes.json();

@@ -1,0 +1,2 @@
+# Ignore vercel.json when deploying student-portal
+vercel.json

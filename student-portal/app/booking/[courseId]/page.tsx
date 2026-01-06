@@ -46,7 +46,8 @@ export default function BookingPage() {
             const studentId = (session?.user as any)?.studentId || localStorage.getItem('studentId');
 
             // 取得課程資訊
-            const coursesRes = await fetch(`http://localhost:3000/api/student/courses?studentId=${studentId}`);
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+            const coursesRes = await fetch(`${apiUrl}/api/student/courses?studentId=${studentId}`);
             const courses = await coursesRes.json();
             const currentCourse = courses.find((c: Course) => c.course_id === courseId);
 
@@ -63,7 +64,7 @@ export default function BookingPage() {
             const endDate = new Date(today);
             endDate.setDate(endDate.getDate() + 30);
 
-            const schedulesRes = await fetch(`http://localhost:3000/api/schedules?coach=${currentCourse.coach}`);
+            const schedulesRes = await fetch(`${apiUrl}/api/schedules?coach=${currentCourse.coach}`);
             const allSchedules = await schedulesRes.json();
 
             // 篩選未來的可用時段
